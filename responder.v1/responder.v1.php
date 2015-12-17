@@ -407,8 +407,8 @@ function sendMail()	{
 			// Получаем количество отправленных писем из отчера за предыдущий день
 			$sendedYesterday = getYesterdayReportData();
 			// Определение количества отправленных писем
-			$sendedInAllTime = ( mail['log'] > count($whoSent) ) 
-				? mail['log']
+			$sendedInAllTime = ( $mail['log'] > count($whoSent) ) 
+				? $mail['log']
 				: count($whoSent);
 			// Подсчитываем, сколько еще можно отправить писем за этот день, не превышая лимитов хостинга
 			$needToSend = $maxMailSendInDay + $sendedYesterday - $sendedInAllTime;
