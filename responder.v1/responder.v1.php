@@ -413,7 +413,7 @@ function sendMail()	{
 			// Подсчитываем, сколько еще можно отправить писем за этот день, не превышая лимитов хостинга
 			$needToSend = $maxMailSendInDay + $sendedYesterday - $sendedInAllTime;
 			// Переопределение максимального количества отправляемых за раз писем
-			$maxMailSend = ( $needToSend > $maxMailSend )
+			$maxMailSend = ( $needToSend >= $maxMailSend )
 				? $maxMailSend
 				: $needToSend;
 			// Если не достигнут суточный лимит количества отправляемых писем
