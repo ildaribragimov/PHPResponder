@@ -8,10 +8,10 @@ header("Content-type: text/html; charset=UTF-8 ");
  * Параметры подключния к БД
  */
 $host		= 'localhost';		// Хост
-$username	= 'sbu16_scorsys';	// Имя пользователя БД
+$username	= 'nabalkinar';	// Имя пользователя БД
 $pass		= 'TKjlNErhgS';		// Пароль доступа к БД
-$dbname		= 'sbu16_scorsys';	// Имя БД
-$prefix		= 'scorsys15_';		// Префикс таблиц базы данных
+$dbname		= 'nabalkinar';	// Имя БД
+$prefix		= 'jos_';		// Префикс таблиц базы данных
 
 /**
  * Параметры установленного подключения к БД
@@ -31,7 +31,7 @@ $maxMailSendInDay		= 1900;			// Максимальное количество о
 $countMailSend			= 0;			// Общий счетчик отправленных писем
 $updateSubscriberInfo	= array();		// Массив запросов на обновление списка отправленных материалов подписчику
 $timeout				= 2;			// Задержка в выполнении функции отправки писем в секундах
-$localhostPath			= '/home/s/sbu16/responder.v1/'; // Путь к директории файлов рассылщика
+$localhostPath			= '/home/n/nabalkinar/public_html/responder.v1/'; // Путь к директории файлов рассылщика
 
 
 
@@ -331,7 +331,7 @@ function generator() {
 		$generatorString = array_diff($generatorString, array('', ' ', null));
 	}
 	// Создаем разметку блока с сгенерированной строкой
-	$dopString = '<div style="background-color:white;color:white;height:5px;display:none;overflow:hidden;">';
+	$dopString = '<div style="display:none;font-size:1px;line-height:1px;overflow:hidden;font-family:sans-serif;">';
 	// Устанавливаем позицию счетчика итераций генерации в положение 0
 	$j = 0;
 	// Генерируем текст из не более, чем 10 значений массива словаря
@@ -469,7 +469,7 @@ function sendMail()	{
 								// Добавляем E-mail адрес подписчика в массив адресатов, кому уже отправлены письма
 								$whoSent[] = $subscriber['email'];
 								// Формируем запрос на обновление списка отправленных у подписчика
-								$updateSubscriberInfo[] = "(".$subscriber['id'].",'".mysql_real_escape_string($subscriber['downloadedDocs']."\r\n".$mail['id'].'.'.$mail['subject'].' ('.date('H:i:s d.m.y')).")')";
+                                $updateSubscriberInfo[] = "(".$subscriber['id'].", '".addslashes($subscriber['downloadedDocs']."\r\n".$mail['id'].". ".$mail['subject']." (".date('H:i:s d.m.y').")")."')";
 								$log[] = 'Письмо c id='.$mail['id'].' успешно отправлено адресату '.$subscriber['email'];
 							} else {
 								// Добавляем сообщение об ошибке в массив лога ошибок
